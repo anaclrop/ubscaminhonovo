@@ -435,7 +435,37 @@
     font-size: 14px; font-weight: 800;
     padding: 5px 14px; border-radius: 20px;
   }
-  .horario-fechado { font-size: 13px; font-weight: 700; color: #888; }
+  .horario-periodo {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 8px; padding: 9px 0; font-size: 13.5px; font-weight: 700; color: #556;
+    border-top: 1px dashed var(--verde-menta);
+  }
+  .horario-periodo strong { color: var(--verde); }
+  .horario-fechado { font-size: 13px; font-weight: 700; color: #888; margin-top: 4px; }
+
+  /* ─── PERÍODOS DE ATENDIMENTO ───────────────────── */
+  .periodo-box {
+    border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; border: 2px solid;
+  }
+  .periodo-manha { background: #fff8e1; border-color: #f5c518; }
+  .periodo-tarde { background: var(--verde-muito-claro); border-color: var(--verde-menta); }
+  .periodo-topo { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .periodo-emoji { font-size: 30px; flex-shrink: 0; }
+  .periodo-titulo { font-size: 16px; font-weight: 900; color: var(--texto); line-height: 1.2; }
+  .periodo-sub { font-size: 12.5px; font-weight: 800; margin-top: 2px; }
+  .periodo-manha .periodo-sub { color: #8a6d00; }
+  .periodo-tarde .periodo-sub { color: var(--verde); }
+  .periodo-desc { font-size: 13.5px; font-weight: 600; color: #556; line-height: 1.55; }
+
+  /* ─── HORÁRIOS POR SERVIÇO ──────────────────────── */
+  .horario-servicos { margin-top: 12px; }
+  .hserv {
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    padding: 10px 12px; margin-bottom: 6px; background: white;
+    border: 1.5px solid var(--verde-menta); border-radius: 10px;
+  }
+  .hserv-nome { font-size: 13.5px; font-weight: 800; color: var(--texto); }
+  .hserv-hora { font-size: 12.5px; font-weight: 800; color: var(--verde); text-align: right; }
 
   /* ─── CONTATO ───────────────────────────────────── */
   .contato-lista { margin-bottom: 14px; }
@@ -722,6 +752,40 @@
     <div class="aviso-amarelo">⚠️ <strong>Menores de 18 anos:</strong> trazer também a certidão de nascimento e documento do responsável.</div>
   </div>
 
+  <!-- SEÇÃO: MANHÃ x TARDE -->
+  <div id="secao-atendimento"></div>
+  <div class="card" style="animation-delay:0.42s">
+    <div class="card-header">
+      <div class="card-icon">🕗</div>
+      <div class="card-title">Manhã ou tarde? Como funciona</div>
+    </div>
+    <p class="card-desc">O atendimento é dividido em dois períodos. Veja qual é o seu antes de vir:</p>
+
+    <div class="periodo-box periodo-manha">
+      <div class="periodo-topo">
+        <span class="periodo-emoji">🌅</span>
+        <div>
+          <div class="periodo-titulo">Manhã · 7h às 12h</div>
+          <div class="periodo-sub">Demanda espontânea (sem agendamento)</div>
+        </div>
+      </div>
+      <p class="periodo-desc">Para quem precisa ser atendido no dia, sem ter marcado antes. A partir das <strong>7h</strong>, retire sua <strong>senha de acolhimento</strong> na recepção. O atendimento segue pela ordem das senhas.</p>
+    </div>
+
+    <div class="periodo-box periodo-tarde">
+      <div class="periodo-topo">
+        <span class="periodo-emoji">🌇</span>
+        <div>
+          <div class="periodo-titulo">Tarde · 13h às 17h</div>
+          <div class="periodo-sub">Atendimentos agendados</div>
+        </div>
+      </div>
+      <p class="periodo-desc">Reservado para as consultas <strong>marcadas previamente na recepção</strong>. Venha no horário da sua marcação.</p>
+    </div>
+
+    <div class="aviso-azul">🩺 Chegou de manhã e as vagas médicas do dia já acabaram? Se você tiver alguma <strong>alteração de saúde</strong> (por exemplo, um sinal vital alterado), passará pela avaliação mesmo assim. Avise a recepção ao chegar.</div>
+  </div>
+
   <!-- SEÇÃO 5: PASSO A PASSO -->
   <div id="secao-passos"></div>
   <div class="card" style="animation-delay:0.45s">
@@ -735,14 +799,14 @@
         <div class="tl-content">
           <div class="tl-titulo">🎟️ Pegue sua senha na recepção</div>
           <p class="tl-desc">Vá ao balcão de entrada e diga que veio para <strong>cadastro</strong> ou <strong>consulta</strong>. A recepcionista entregará uma senha.</p>
-          <div class="tl-dica">📌 Senhas distribuídas desde as 7h. Quanto mais cedo, menor a espera.</div>
+          <div class="tl-dica">📌 Senhas da demanda espontânea a partir das 7h. Quanto mais cedo, menor a espera.</div>
         </div>
       </div>
       <div class="tl-item">
         <div class="tl-dot">2</div>
         <div class="tl-content">
           <div class="tl-titulo">🪑 Aguarde ser chamado(a)</div>
-          <p class="tl-desc">Sente-se na sala de espera e fique atento ao painel de senhas ou ao chamado pelo nome.</p>
+          <p class="tl-desc">Sente-se na sala de espera e aguarde. O profissional chamará pela sua senha ou pelo seu nome.</p>
         </div>
       </div>
       <div class="tl-item">
@@ -802,8 +866,23 @@
         <span class="horario-dia">📅 Segunda a Sexta-feira</span>
         <span class="horario-hora">7h às 17h</span>
       </div>
+      <div class="horario-periodo">
+        <span>🌅 Manhã · 7h às 12h</span>
+        <strong>Demanda espontânea</strong>
+      </div>
+      <div class="horario-periodo">
+        <span>🌇 Tarde · 13h às 17h</span>
+        <strong>Agendados</strong>
+      </div>
+      <div class="horario-servicos">
+        <div class="hserv"><span class="hserv-nome">💉 Vacina</span><span class="hserv-hora">08h–11h15 · 13h–15h30</span></div>
+        <div class="hserv"><span class="hserv-nome">🩹 Curativo</span><span class="hserv-hora">08h às 16h</span></div>
+        <div class="hserv"><span class="hserv-nome">💊 Farmácia</span><span class="hserv-hora">07h30 às 16h30</span></div>
+        <div class="hserv"><span class="hserv-nome">🖥️ Recepção</span><span class="hserv-hora">07h30 às 16h30</span></div>
+        <div class="hserv"><span class="hserv-nome">🩺 Enfermagem</span><span class="hserv-hora">07h30 às 16h30</span></div>
+      </div>
       <div class="horario-fechado">🚫 Não funcionamos aos sábados, domingos e feriados</div>
-      <div class="tl-dica" style="margin-top:10px">📌 Distribuição de senhas a partir das <strong>7h00</strong> na recepção.</div>
+      <div class="tl-dica" style="margin-top:10px">📌 Senhas da demanda espontânea a partir das <strong>7h00</strong> na recepção.</div>
     </div>
   </div>
 
@@ -815,9 +894,9 @@
     </div>
     <div class="contato-lista">
       <div class="contato-item">📞 <strong>Telefone:</strong> (48) 3047-5524</div>
-      <div class="contato-item">📍 <strong>Endereço:</strong> R. dos Apóstolos, 43 – Caminho Novo, Palhoça – SC</div>
+      <div class="contato-item">📍 <strong>Endereço:</strong> Rua Germano Spricigo, s/nº – Caminho Novo, Palhoça – SC</div>
     </div>
-    <a class="btn-contato" href="https://www.google.com/maps/dir/?api=1&destination=R.+dos+Ap%C3%B3stolos,+43+Caminho+Novo+Palho%C3%A7a+SC" target="_blank" rel="noopener noreferrer">
+    <a class="btn-contato" href="https://www.google.com/maps/dir/?api=1&destination=Rua+Germano+Spricigo,+Caminho+Novo,+Palho%C3%A7a+SC" target="_blank" rel="noopener noreferrer">
       🗺️ Como chegar — Abrir no Google Maps
     </a>
   </div>
@@ -829,6 +908,10 @@
       <div class="card-title">Perguntas frequentes</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-pergunta">Qual a diferença entre manhã e tarde? <span class="faq-seta">▾</span></div>
+      <div class="faq-resposta">De manhã (7h às 12h) atendemos a demanda espontânea — quem não agendou e precisa ser atendido no dia, mediante senha retirada na recepção. À tarde (13h às 17h) atendemos as consultas que já foram marcadas previamente na recepção.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
       <div class="faq-pergunta">Preciso de encaminhamento para consultar aqui? <span class="faq-seta">▾</span></div>
       <div class="faq-resposta">Não! A UBS é a porta de entrada do SUS. Você pode vir diretamente, sem encaminhamento médico.</div>
     </div>
@@ -837,8 +920,8 @@
       <div class="faq-resposta">Sim. Se você não tiver o cartão, a UBS faz o seu na hora, gratuitamente.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-pergunta">E se eu vier e não tiver mais senhas? <span class="faq-seta">▾</span></div>
-      <div class="faq-resposta">Para urgências, o atendimento é garantido mesmo sem senha. Informe à recepção ao chegar.</div>
+      <div class="faq-pergunta">E se eu vier e as vagas médicas acabarem? <span class="faq-seta">▾</span></div>
+      <div class="faq-resposta">Se as vagas médicas do dia acabarem, mas você tiver uma alteração de saúde (como um sinal vital alterado), ainda assim passará pela avaliação. Informe à recepção ao chegar.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
       <div class="faq-pergunta">Posso vacinar meu filho sem agendamento? <span class="faq-seta">▾</span></div>
